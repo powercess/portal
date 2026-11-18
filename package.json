@@ -1,0 +1,35 @@
+{
+  "name": "portal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "mode": "bun tooling/mode.ts",
+    "mode:help": "bun tooling/mode.ts help",
+    "mode:status": "bun tooling/mode.ts status",
+    "mode:start": "bun tooling/mode.ts start",
+    "mode:stop": "bun tooling/mode.ts stop",
+    "mode:restart": "bun tooling/mode.ts restart",
+    "mode:reload": "bun tooling/mode.ts reload",
+    "mode:logs": "bun tooling/mode.ts logs",
+    "mode:health": "bun tooling/mode.ts health",
+    "mode:clean": "bun tooling/mode.ts clean",
+    "mode:clean:dry": "bun tooling/mode.ts clean --dry-run"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router-dom": "^7.18.5"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "5.9.3",
+    "vite": "^8.3.8"
+  }
+}
