@@ -38,7 +38,20 @@ const tls =
 
 const instanceId = env.MODE_INSTANCE_ID ?? "unknown";
 
-function healthHandler(req: unknown, res: { setHeader: (k: string, v: string) => void; end: (b: string) => void }): void {
+type ConnectNext = (error?: unknown) => void;
+type ConnectReq = { url?: string };
+type ConnectRes = {
+  setHeader: (k: string, v: string) => void;
+  end: (body?: string) => void;
+};
+
+/** 栈顶中间件看到所有请求：只接管 /__mode/health，其余调 next() 交给 Vite 处理。 */
+function healthHandler(req: ConnectReq, res: ConnectRes, next: ConnectNext): void {
+  const url = req.url ?? "";
+  if (!url.startsWith("/__mode/health")) {
+    next();
+    return;
+  }
   res.setHeader("x-mode-instance", instanceId);
   res.setHeader("content-type", "application/json");
   res.end(JSON.stringify({ ok: true, instance: instanceId, mode }));
